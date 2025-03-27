@@ -15,26 +15,19 @@ import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
+import com.Base.Rsc_Ecom.Utilites;
+
 import io.cucumber.datatable.DataTable;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import junit.framework.Assert;
 
-public class Shoping {
-	static WebDriver driver;
-	static ChromeOptions option;
-	static WebDriverWait wait;
-	static JavascriptExecutor js;
+public class Shoping extends Utilites{
+	
 	@Given("Lauch the application RSC {string}")
-	public void lauch_the_application_rsc(String laucherurl) {
-		option = new ChromeOptions();
-		option.addArguments("start-maximized");
-		option.addArguments("disable-popups");
-		option.addArguments("disable-notification");
-	   driver = new ChromeDriver(option);
-	   driver.get(laucherurl);
-	   driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
+	public void lauch_the_application_rsc(String laucher) {
+		BrowserLaucher(laucher);
 	}
 	
 	@When("user Accept or Dismiss the cookies")
@@ -42,10 +35,10 @@ public class Shoping {
 	   driver.findElement(By.xpath("//button[text()='Reject All' and @id='onetrust-reject-all-handler']")).click();
 	}
 
-	@Then("Validate user lands on the Homepage")
-	public void validate_user_lands_on_the_homepage() {
+	@Then("Validate user lands on the Homepage {string}")
+	public void validate_user_lands_on_the_homepage(String url) {
 	   String Title = driver.getCurrentUrl();
-	   if (Title.contains("https://www.rsc.org.uk/")) {
+	   if (Title.contains(url)) {
 		   System.out.println("User navigate to the correct Application");
 	   }else {
 		   System.out.println("URl is not Working properly");
@@ -67,8 +60,8 @@ public class Shoping {
 	   ExceptedResult.add("Visit Main RSC website");
 	   ExceptedResult.add("RSC Gift Vouchers");
 	   ExceptedResult.add("Blog");
-	   wait = new WebDriverWait(driver, Duration.ofSeconds(10));
-	    wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//ul[@class='list-menu list-menu--inline']//descendant::span")));
+	   Waits = new WebDriverWait(driver, Duration.ofSeconds(10));
+	    Waits.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//ul[@class='list-menu list-menu--inline']//descendant::span")));
 	   List <WebElement> SubModels = driver.findElements(By.xpath("//ul[@class='list-menu list-menu--inline']//descendant::span"));
 	   for (int i = 0; i < SubModels.size(); i++) {
 		   String ActualResult = SubModels.get(i).getText().trim();
@@ -109,8 +102,8 @@ public class Shoping {
 
 	@Then("validate items in the Description belongs to the Search")
 	public void validate_items_in_the_description_belongs_to_the_search() {
-		 wait = new WebDriverWait(driver, Duration.ofSeconds(10));
-	    wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//p[@class='predictive-search__item-heading h5']")));
+		Waits = new WebDriverWait(driver, Duration.ofSeconds(10));
+		Waits.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//p[@class='predictive-search__item-heading h5']")));
 	   List <WebElement> SearchResult = driver.findElements(By.xpath("//p[@class='predictive-search__item-heading h5']"));
 	   for (int i = 0; i < SearchResult.size(); i++) {
 		   String Products = SearchResult.get(i).getText().trim();
