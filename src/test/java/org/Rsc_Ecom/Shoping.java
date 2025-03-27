@@ -1,44 +1,43 @@
 package org.Rsc_Ecom;
 
 import java.time.Duration;
+
 import java.util.ArrayList;
-import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
-
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
+import org.pageobjectRepo.Shopinglocator;
 
 import com.Base.Rsc_Ecom.Utilites;
 
+import cucumber.api.java.en.Given;
+import cucumber.api.java.en.Then;
+import cucumber.api.java.en.When;
 import io.cucumber.datatable.DataTable;
-import io.cucumber.java.en.Given;
-import io.cucumber.java.en.Then;
-import io.cucumber.java.en.When;
-import junit.framework.Assert;
+
+
 
 public class Shoping extends Utilites{
-	
+	Shopinglocator shops = new Shopinglocator();
+	Utilites utility = new Utilites();
 	@Given("Lauch the application RSC {string}")
 	public void lauch_the_application_rsc(String laucher) {
-		BrowserLaucher(laucher);
+																												
 	}
 	
 	@When("user Accept or Dismiss the cookies")
 	public void user_accept_or_dismiss_the_cookies() {
-	   driver.findElement(By.xpath("//button[text()='Reject All' and @id='onetrust-reject-all-handler']")).click();
+			utility.button(shops.getAccept());
 	}
 
 	@Then("Validate user lands on the Homepage {string}")
 	public void validate_user_lands_on_the_homepage(String url) {
-	   String Title = driver.getCurrentUrl();
-	   if (Title.contains(url)) {
+		
+	   if (utility.returncurrentUrl().contains(url)) {
 		   System.out.println("User navigate to the correct Application");
 	   }else {
 		   System.out.println("URl is not Working properly");
@@ -62,9 +61,9 @@ public class Shoping extends Utilites{
 	   ExceptedResult.add("Blog");
 	   Waits = new WebDriverWait(driver, Duration.ofSeconds(10));
 	    Waits.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//ul[@class='list-menu list-menu--inline']//descendant::span")));
-	   List <WebElement> SubModels = driver.findElements(By.xpath("//ul[@class='list-menu list-menu--inline']//descendant::span"));
-	   for (int i = 0; i < SubModels.size(); i++) {
-		   String ActualResult = SubModels.get(i).getText().trim();
+	//   List <WebElement> SubModels = driver.findElements(By.xpath("//ul[@class='list-menu list-menu--inline']//descendant::span"));
+	   for (int i = 0; i < shops.getSubModels().size(); i++) {
+		   String ActualResult = shops.getSubModels().get(i).getText().trim();
 		    for (String excepted : ExceptedResult) {
 		    	 if (excepted.equalsIgnoreCase(ActualResult)) {
 					   System.out.println("Required Model: "+ActualResult);
@@ -77,37 +76,39 @@ public class Shoping extends Utilites{
 
 	@When("User Clicks on Clothes&Accessories")
 	public void user_clicks_on_clothes_accessories() {
-	   driver.findElement(By.xpath("//span[text()='Clothing & Accessories']")).click();
+	//   WebElement clothes = driver.findElement(By.xpath("//span[text()='Clothing & Accessories']"));
+	   utility.button(shops.getClothes());
 	}
 
 	@Then("Validate DropDown items Displayed")
 	public void validate_drop_down_items_displayed() {
-	   WebElement Visiblity = driver.findElement(By.xpath("//ul[@id='HeaderMenu-MenuList-2']"));
-	   boolean checks = Visiblity.isDisplayed();
-	   System.out.println("DropDown is visible: "+checks);
+	//   WebElement Visiblity = driver.findElement(By.xpath("//ul[@id='HeaderMenu-MenuList-2']"));
+	   
+	   System.out.println("DropDown is visible: "+utility.returnDisplay(shops.getVisiblity()));
 	}
 
 	@When("User Clicks the Search functionality")
 	public void user_clicks_the_search_functionality() {
-	   driver.findElement(By.xpath("//details-modal[@class='header__search']")).click();
+	//  WebElement Search =  driver.findElement(By.xpath("//details-modal[@class='header__search']"));
+	  utility.button(shops.getSearch());
 	}
 
 	@When("User Provide the Keys one dim list")
 	public void user_provide_the_keys(DataTable dataTable) { 
 		List<String> value= dataTable.asList();
 		String key = value.get(0);
-	   WebElement Keys = driver.findElement(By.xpath("//input[@class='search__input field__input']"));
-	   Keys.sendKeys(key);
+	//   WebElement Keys = driver.findElement(By.xpath("//input[@class='search__input field__input']"));
+	   utility.passkeys(shops.getKeys(), key);
 	}
 
 	@Then("validate items in the Description belongs to the Search")
 	public void validate_items_in_the_description_belongs_to_the_search() {
 		Waits = new WebDriverWait(driver, Duration.ofSeconds(10));
 		Waits.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//p[@class='predictive-search__item-heading h5']")));
-	   List <WebElement> SearchResult = driver.findElements(By.xpath("//p[@class='predictive-search__item-heading h5']"));
-	   for (int i = 0; i < SearchResult.size(); i++) {
-		   String Products = SearchResult.get(i).getText().trim();
-		   if (Products.contains("Shirt")) {
+	 //  List <WebElement> SearchResult = driver.findElements(By.xpath("//p[@class='predictive-search__item-heading h5']"));
+	   for (int i = 0; i < shops.getSearchResult().size(); i++) {
+		   String Products = shops.getSearchResult().get(i).getText();
+		   if (utility.returnText(Products).trim().contains("Shirt")) {
 			   System.out.println("Result Met With the search: "+Products);
 		   }else {
 			   System.out.println("Result NotMet With the search: "+Products);
@@ -117,42 +118,43 @@ public class Shoping extends Utilites{
 	}
 	 @When("User Clicks on Books HomeWare and Gifts")
 	    public void user_clicks_on_books_home_ware_and_gifts() {
-	        WebElement homeWare = driver.findElement(By.xpath("//summary[@id='HeaderMenu-homeware-and-gifts']"));
-	        homeWare.click();
+	    //    WebElement homeWare = driver.findElement(By.xpath("//summary[@id='HeaderMenu-homeware-and-gifts']"));
+	        utility.button(shops.getBooks());
 	    }
 	@Then("Validate DropDown of HomeWare items Displayed")
 	public void validate_drop_down_of_home_ware_items_displayed() {
-	   WebElement HomeWareList = driver.findElement(By.xpath("//details[@id='Details-HeaderMenu-4']"));
-	   boolean visible = HomeWareList.isDisplayed();
-	   System.out.println("option is visible: "+visible);
+	//   WebElement HomeWareList = driver.findElement(By.xpath("//details[@id='Details-HeaderMenu-4']"));
+	  boolean display =  utility.returnDisplay(shops.getHomeWare());
+	   System.out.println("option is visible: "+display);
 	}
 	
 	@When("user clicks on All_HomeWare")
 	public void user_clicks_on_all_home_ware() {
-	  driver.findElement(By.xpath("//a[@id='HeaderMenu-homeware-and-gifts-all-homeware']")).click();
+	//  WebElement HomeWare= driver.findElement(By.xpath("//a[@id='HeaderMenu-homeware-and-gifts-all-homeware']"));
+	   utility.button(shops.getHomeWare());
 	}
 
 	@Then("validate Wheather it is move to the current page")
 	public void validate_wheather_it_is_move_to_the_current_page() {
-	   WebElement DomText = driver.findElement(By.xpath("//div[@class='collection-hero__text-wrapper']"));
-	   String text = DomText.getText();
-	   System.out.println("User navigate to the Current page: "+text);
+	//   WebElement Text = driver.findElement(By.xpath("//div[@class='collection-hero__text-wrapper']"));
+	   System.out.println("User navigate to the Current page: "+utility.returnText(shops.getText()));
 	}
 
 	@When("user clicks on Color")
 	public void user_clicks_on_color() {
-	   driver.findElement(By.xpath("//details[@id='Details-3-template--14838647521367__product-grid']")).click();
+	//   WebElement Color= driver.findElement(By.xpath("//details[@id='Details-3-template--14838647521367__product-grid']"));
+	   utility.button(shops.getColor());
 	}
 
 	@Then("Validate the CheckBoxes is Multiple")
 	public void validate_the_check_boxes_is_multiple() {
 	 int Selected = 0;
-	  List <WebElement> CheckBoxes = driver.findElements(By.xpath("//div[@id='Facet-3-template--14838647521367__product-grid']//descendant::input[contains(@id,'Filter-filter.v.option.colour')]"));
-         for (int i = 0; i < CheckBoxes.size(); i++) {
-        	 WebElement CheckBox = CheckBoxes.get(i);
-        	 js = (JavascriptExecutor) driver;
-        	 js.executeScript("arguments[0].click()", CheckBox);
-        	 if(CheckBox.isSelected()) {
+	//  List <WebElement> CheckBoxes = driver.findElements(By.xpath("//div[@id='Facet-3-template--14838647521367__product-grid']//descendant::input[contains(@id,'Filter-filter.v.option.colour')]"));
+         for (int i = 0; i < shops.getCheckBoxes().size(); i++) {
+        	 WebElement CheckBox = shops.getCheckBoxes().get(i);
+        	 utility.button(CheckBox, i);
+        	 
+        	 if(utility.returnSelected(CheckBox)) {
         		 Selected++;
         	 }
          }
@@ -169,7 +171,7 @@ public class Shoping extends Utilites{
 		Map <String,String> value =Text.asMap(String.class, String.class);
 		String Keys = value.get("value1");
 		 WebElement values = driver.findElement(By.xpath("//a[text()='"+Keys+"']"));
-		 values.click();
+		 utility.button(values);
 	  
 	}
 
@@ -187,9 +189,10 @@ public class Shoping extends Utilites{
 		ExceptResult.add("Textiles");
 		ExceptResult.add("Travel Mugs & Water Bottles");
 		ExceptResult.add("All Homeware"); 
-		List <WebElement> ActualResult = driver.findElements(By.xpath("//ul[@id='HeaderMenu-MenuList-4']//descendant::a"));
-		for (int i=0; i <ActualResult.size(); i++) {
-			String Actual = ActualResult.get(i).getText();
+	//	List <WebElement> ActualResult = driver.findElements(By.xpath("//ul[@id='HeaderMenu-MenuList-4']//descendant::a"));
+		for (int i=0; i < shops.getActualResult().size(); i++) {
+		//	String Actual = .getText();
+			String Actual = utility.returnText(shops.getActualResult().get(i));
 			for (String Except:ExceptResult) {
 				if(Actual.equalsIgnoreCase(Except)) {
 					System.out.println("Model Releated Item: "+Actual);
@@ -200,22 +203,24 @@ public class Shoping extends Utilites{
 	}
 	@When("User Clicks on the Account")
 	public void user_clicks_on_the_account() {
-	   driver.findElement(By.xpath("//a[@class='header__icon header__icon--account link focus-inset small-hide']")).click();
+	//   WebElement Account = driver.findElement(By.xpath("//a[@class='header__icon header__icon--account link focus-inset small-hide']"));
+	   utility.button(shops.getAccount());
 	}
 
 	@When("User provides the username {string}")
 	public void user_provides_the_username(String Username) {
-		 WebElement userNameField = driver.findElement(By.xpath("//input[@id='CustomerEmail']"));
-		 userNameField.sendKeys(Username);
+	//	 WebElement userNameField = driver.findElement(By.xpath("//input[@id='CustomerEmail']"));
+		 utility.passkeys(shops.getUserNameField(), Username);
 	}
 	@When("user provides the Password {string}")
 	public void user_provides_the_password(String password) {
-	   WebElement UserPassword = driver.findElement(By.xpath("//input[@id='CustomerPassword']"));
-	   UserPassword.sendKeys(password);
+	//   WebElement UserPassword = driver.findElement(By.xpath("//input[@id='CustomerPassword']"));
+	   utility.passkeys(shops.getUserPassword(), password);
 	}
 	@When("user click on Sign_in")
 	public void user_click_on_sign_in() {
-	    driver.findElement(By.xpath("//div[@id='shopify-section-template--14838647881815__main']//descendant::button[2]")).click();
+	//    WebElement signin = driver.findElement(By.xpath("//div[@id='shopify-section-template--14838647881815__main']//descendant::button[2]"));
+	    utility.button(shops.getsignin());
 	}
 
 //	@Then("Validate the Crenditals")
