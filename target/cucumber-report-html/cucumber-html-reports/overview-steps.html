@@ -1,0 +1,358 @@
+<!DOCTYPE html>
+<html>
+<head>
+  
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+
+<script type="text/javascript" src="js/jquery.min.js"></script>
+<script type="text/javascript" src="js/jquery.tablesorter.min.js"></script>
+<script type="text/javascript" src="js/Chart.min.js"></script>
+<script type="text/javascript" src="js/moment.min.js"></script>
+<script type="text/javascript" src="js/bootstrap.min.js"></script>
+
+<link rel="stylesheet" href="css/bootstrap.min.css" type="text/css"/>
+<link rel="stylesheet" href="css/cucumber.css" type="text/css"/>
+<link rel="stylesheet" href="css/font-awesome.min.css"/>
+<link rel="shortcut icon" href="images/favicon.png"/>
+
+<script type="text/javascript">
+$(document).ready(function() {
+    // this will tell tablesorter to try looking for the data-value attribute
+    // if present, it'll sort by that instead
+    // otherwise, it'll sort by the text content of the table cell
+    $("#tablesorter").tablesorter({
+        textAttribute: 'data-value',
+        // ignores the first row of the header, the 'scenario', 'steps', since
+        // sorting those doesn't make sense
+        selectorHeaders: '> thead tr:not(.dont-sort) th',
+        // use a stable sort
+        sortStable: true
+    });
+});
+</script>
+
+
+
+
+
+
+
+
+
+
+
+  
+<title>Cucumber Reports (no 2.0) - Steps Overview</title>
+
+</head>
+<body>
+
+<nav class="navbar navbar-default navbar-fixed-top" id="navigation">
+  <div class="container-fluid">
+    <div class="collapse navbar-collapse">
+      <p class="navbar-text navbar-left">Cucumber Report</p>
+      <ul class="nav navbar-nav navbar-right">
+                <li role="presentation" ><a href="overview-features.html">Features</a></li>
+        <li role="presentation" ><a href="overview-tags.html">Tags</a></li>
+        <li role="presentation"     class="active" ><a href="overview-steps.html">Steps</a></li>
+                <li role="presentation" ><a href="overview-failures.html">Failures</a></li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+
+<div class="container-fluid">
+  <div class="col-md-5 col-md-offset-1">
+    
+<table class="table table-bordered" id="build-info">
+  <thead>
+    <tr>
+      <th>Project</th>
+              <th>Number</th>
+            <th>Date</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr class="info">
+      <td>org.Rsc_Ecom</td>
+              <td>2.0</td>
+            <td>29 Mar 2025, 01:47</td>
+    </tr>
+  </tbody>
+</table>
+
+  </div>
+  <div class="col-md-3 col-md-offset-2">
+      </div>
+</div>
+
+
+<div id="report-lead" class="container-fluid">
+  <div class="col-md-10 col-md-offset-1">
+    <h2>Steps Statistics</h2>
+          <p>The following graph shows step statistics for this build. Below list is based on results.
+ step does not provide information about result then is not listed below.
+ Additionally @Before and @After are not counted because they are part of the scenarios, not steps.</p>
+      </div>
+</div>
+
+<div class="container-fluid" id="report">
+  <div class="row">
+    <div class="col-md-10 col-md-offset-1">
+      <table id="tablesorter" class="stats-table table-hover">
+
+        <thead>
+          <tr class="header">
+            <th>Implementation</th>
+            <th>Occurrences</th>
+            <th>Average duration</th>
+            <th>Max duration</th>
+            <th>Total durations</th>
+            <th>Ratio</th>
+          </tr>
+        </thead>
+
+        <tbody>
+                      <tr>
+              <td class="location">Hooks.ApplicationLaucher(Scenario)</td>
+              <td>5</td>
+              <td class="duration" data-value="4933883600">4.933</td>
+              <td class="duration" data-value="4933883600">6.264</td>
+              <td class="duration" data-value="24669418000">24.669</td>
+              <td class="passed">100.00%</td>
+            </tr>
+                      <tr>
+              <td class="location">Hooks.tearDown(Scenario)</td>
+              <td>5</td>
+              <td class="duration" data-value="443371600">0.443</td>
+              <td class="duration" data-value="443371600">0.717</td>
+              <td class="duration" data-value="2216858000">2.216</td>
+              <td class="passed">100.00%</td>
+            </tr>
+                      <tr>
+              <td class="location">Shoping.lauch_the_application_rsc(String)</td>
+              <td>5</td>
+              <td class="duration" data-value="5627460">0.005</td>
+              <td class="duration" data-value="5627460">0.020</td>
+              <td class="duration" data-value="28137300">0.028</td>
+              <td class="passed">100.00%</td>
+            </tr>
+                      <tr>
+              <td class="location">Shoping.user_accept_or_dismiss_the_cookies()</td>
+              <td>5</td>
+              <td class="duration" data-value="97068960">0.097</td>
+              <td class="duration" data-value="97068960">0.117</td>
+              <td class="duration" data-value="485344800">0.485</td>
+              <td class="passed">100.00%</td>
+            </tr>
+                      <tr>
+              <td class="location">Shoping.user_click_on_sign_in()</td>
+              <td>2</td>
+              <td class="duration" data-value="192776950">0.192</td>
+              <td class="duration" data-value="192776950">0.284</td>
+              <td class="duration" data-value="385553900">0.385</td>
+              <td class="passed">100.00%</td>
+            </tr>
+                      <tr>
+              <td class="location">Shoping.user_clicks_on_all_home_ware()</td>
+              <td>1</td>
+              <td class="duration" data-value="1914996400">1.914</td>
+              <td class="duration" data-value="1914996400">1.914</td>
+              <td class="duration" data-value="1914996400">1.914</td>
+              <td class="passed">100.00%</td>
+            </tr>
+                      <tr>
+              <td class="location">Shoping.user_clicks_on_books_home_ware_and_gifts()</td>
+              <td>1</td>
+              <td class="duration" data-value="162773300">0.162</td>
+              <td class="duration" data-value="162773300">0.162</td>
+              <td class="duration" data-value="162773300">0.162</td>
+              <td class="passed">100.00%</td>
+            </tr>
+                      <tr>
+              <td class="location">Shoping.user_clicks_on_clothes_accessories()</td>
+              <td>1</td>
+              <td class="duration" data-value="126471800">0.126</td>
+              <td class="duration" data-value="126471800">0.126</td>
+              <td class="duration" data-value="126471800">0.126</td>
+              <td class="passed">100.00%</td>
+            </tr>
+                      <tr>
+              <td class="location">Shoping.user_clicks_on_color()</td>
+              <td>1</td>
+              <td class="duration" data-value="112228100">0.112</td>
+              <td class="duration" data-value="112228100">0.112</td>
+              <td class="duration" data-value="112228100">0.112</td>
+              <td class="passed">100.00%</td>
+            </tr>
+                      <tr>
+              <td class="location">Shoping.user_clicks_on_the_account()</td>
+              <td>2</td>
+              <td class="duration" data-value="3778024750">3.778</td>
+              <td class="duration" data-value="3778024750">4.198</td>
+              <td class="duration" data-value="7556049500">7.556</td>
+              <td class="passed">100.00%</td>
+            </tr>
+                      <tr>
+              <td class="location">Shoping.user_clicks_the_search_functionality()</td>
+              <td>1</td>
+              <td class="duration" data-value="202491600">0.202</td>
+              <td class="duration" data-value="202491600">0.202</td>
+              <td class="duration" data-value="202491600">0.202</td>
+              <td class="passed">100.00%</td>
+            </tr>
+                      <tr>
+              <td class="location">Shoping.user_clicks_the_shop_module_one_dim_map(DataTable)</td>
+              <td>4</td>
+              <td class="duration" data-value="1885273950">1.885</td>
+              <td class="duration" data-value="1885273950">2.331</td>
+              <td class="duration" data-value="7541095800">7.541</td>
+              <td class="passed">100.00%</td>
+            </tr>
+                      <tr>
+              <td class="location">Shoping.user_provide_the_keys(DataTable)</td>
+              <td>1</td>
+              <td class="duration" data-value="109528000">0.109</td>
+              <td class="duration" data-value="109528000">0.109</td>
+              <td class="duration" data-value="109528000">0.109</td>
+              <td class="passed">100.00%</td>
+            </tr>
+                      <tr>
+              <td class="location">Shoping.user_provides_the_password(String)</td>
+              <td>2</td>
+              <td class="duration" data-value="292713100">0.292</td>
+              <td class="duration" data-value="292713100">0.465</td>
+              <td class="duration" data-value="585426200">0.585</td>
+              <td class="passed">100.00%</td>
+            </tr>
+                      <tr>
+              <td class="location">Shoping.user_provides_the_username(String)</td>
+              <td>2</td>
+              <td class="duration" data-value="122042050">0.122</td>
+              <td class="duration" data-value="122042050">0.127</td>
+              <td class="duration" data-value="244084100">0.244</td>
+              <td class="passed">100.00%</td>
+            </tr>
+                      <tr>
+              <td class="location">Shoping.validate_drop_down_items_displayed()</td>
+              <td>1</td>
+              <td class="duration" data-value="57399400">0.057</td>
+              <td class="duration" data-value="57399400">0.057</td>
+              <td class="duration" data-value="57399400">0.057</td>
+              <td class="passed">100.00%</td>
+            </tr>
+                      <tr>
+              <td class="location">Shoping.validate_drop_down_of_home_ware_items_displayed()</td>
+              <td>1</td>
+              <td class="duration" data-value="27702800">0.027</td>
+              <td class="duration" data-value="27702800">0.027</td>
+              <td class="duration" data-value="27702800">0.027</td>
+              <td class="passed">100.00%</td>
+            </tr>
+                      <tr>
+              <td class="location">Shoping.validate_items_in_the_description_belongs_to_the_search()</td>
+              <td>1</td>
+              <td class="duration" data-value="1565064300">1.565</td>
+              <td class="duration" data-value="1565064300">1.565</td>
+              <td class="duration" data-value="1565064300">1.565</td>
+              <td class="passed">100.00%</td>
+            </tr>
+                      <tr>
+              <td class="location">Shoping.validate_the_check_boxes_is_multiple()</td>
+              <td>1</td>
+              <td class="duration" data-value="324637500">0.324</td>
+              <td class="duration" data-value="324637500">0.324</td>
+              <td class="duration" data-value="324637500">0.324</td>
+              <td class="passed">100.00%</td>
+            </tr>
+                      <tr>
+              <td class="location">Shoping.validate_the_drop_down_list_out_model_related_items()</td>
+              <td>1</td>
+              <td class="duration" data-value="351717000">0.351</td>
+              <td class="duration" data-value="351717000">0.351</td>
+              <td class="duration" data-value="351717000">0.351</td>
+              <td class="passed">100.00%</td>
+            </tr>
+                      <tr>
+              <td class="location">Shoping.validate_the_sub_models_of_shop()</td>
+              <td>1</td>
+              <td class="duration" data-value="1054690000">1.054</td>
+              <td class="duration" data-value="1054690000">1.054</td>
+              <td class="duration" data-value="1054690000">1.054</td>
+              <td class="passed">100.00%</td>
+            </tr>
+                      <tr>
+              <td class="location">Shoping.validate_user_lands_on_the_homepage(String)</td>
+              <td>5</td>
+              <td class="duration" data-value="11579820">0.011</td>
+              <td class="duration" data-value="11579820">0.016</td>
+              <td class="duration" data-value="57899100">0.057</td>
+              <td class="passed">100.00%</td>
+            </tr>
+                      <tr>
+              <td class="location">Shoping.validate_wheather_it_is_move_to_the_current_page()</td>
+              <td>1</td>
+              <td class="duration" data-value="40624400">0.040</td>
+              <td class="duration" data-value="40624400">0.040</td>
+              <td class="duration" data-value="40624400">0.040</td>
+              <td class="passed">100.00%</td>
+            </tr>
+                      <tr>
+              <td class="location">logo.validate_the_font_color_in_the_app()</td>
+              <td>1</td>
+              <td class="duration" data-value="36206300">0.036</td>
+              <td class="duration" data-value="36206300">0.036</td>
+              <td class="duration" data-value="36206300">0.036</td>
+              <td class="passed">100.00%</td>
+            </tr>
+                      <tr>
+              <td class="location">logo.validate_the_font_size_in_the_app()</td>
+              <td>1</td>
+              <td class="duration" data-value="27370900">0.027</td>
+              <td class="duration" data-value="27370900">0.027</td>
+              <td class="duration" data-value="27370900">0.027</td>
+              <td class="passed">100.00%</td>
+            </tr>
+                      <tr>
+              <td class="location">logo.validate_the_font_weight()</td>
+              <td>1</td>
+              <td class="duration" data-value="47899300">0.047</td>
+              <td class="duration" data-value="47899300">0.047</td>
+              <td class="duration" data-value="47899300">0.047</td>
+              <td class="passed">100.00%</td>
+            </tr>
+                  </tbody>
+
+        <tfoot class="total">
+          <tr>
+            <td>26</td>
+            <td>53</td>
+            <td class="duration">0.942</td>
+            <td class="duration">24.669</td>
+            <td class="duration">49.931</td>
+            <td>Totals</td>
+          </tr>
+        </tfoot>
+
+      </table>
+    </div>
+  </div>
+</div>
+
+
+<nav class="navbar navbar-default" id="footer">
+  <div class="container-fluid">
+    <p class="navbar-text navbar-right">
+        <small>generate Cucumber HTML reports via:&nbsp;</small>
+        <a class="navbar-link" href="https://github.com/jenkinsci/cucumber-reports-plugin">Jenkins Plugin</a> |
+        <a class="navbar-link" href="https://github.com/damianszczepanik/cucumber-reporting">Standalone</a> |
+        <a class="navbar-link" href="https://github.com/damianszczepanik/cucumber-sandwich">Sandwich</a> |
+        <a class="navbar-link" href="https://github.com/damianszczepanik/maven-cucumber-reporting">Maven</a>
+        &nbsp;&nbsp;
+    </p>
+  </div>
+</nav>
+
+</body>
+</html>

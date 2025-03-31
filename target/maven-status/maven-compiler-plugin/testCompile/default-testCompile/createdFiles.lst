@@ -1,0 +1,8 @@
+org\pageobjectRepo\Shopinglocator.class
+org\pageobjectRepo\LogoLocator.class
+org\Rsc_Ecom\Shoping.class
+org\TestRunner\Rsc_Ecom\TestRunner.class
+com\Base\Rsc_Ecom\Iutility.class
+org\Rsc_Ecom\logo.class
+com\Base\Rsc_Ecom\Utilites.class
+com\Hooks\org\rsc_Ecom\Hooks.class
