@@ -15,7 +15,8 @@ import cucumber.api.junit.Cucumber;
                   tags = "@smoke",
                   monochrome = true,
                   dryRun = false,
-                  plugin = {"html:target/html.report","json:target/cucumber-report.json"})
+                  plugin = {"html:target/cucumber-reports/reports.html", "json:target/cucumber-reports/reports.json"}
+)
 
 
 public class TestRunner {
