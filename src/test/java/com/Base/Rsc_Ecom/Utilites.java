@@ -4,9 +4,15 @@ import java.io.File;
 
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.ResultSet;
+import java.sql.Statement;
 import java.time.Duration;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Properties;
 import java.util.Set;
 
@@ -32,6 +38,14 @@ public class Utilites implements Iutility{
 	public static JavascriptExecutor js;
 	public static Actions action;
 	public static Select drops;
+	public static Utilites utils = null;
+	private Utilites() {}
+	public static Utilites getSingle() {
+		if(utils == null) {
+			utils = new Utilites();
+		}
+		return utils;
+	}
 	public static void BrowserLaucher() {
 		File f = new File (".\\src\\test\\resources\\Rsc.properties");
 		Properties prop;
@@ -375,6 +389,34 @@ public class Utilites implements Iutility{
 	public String returnText(WebElement ele) {
 		String text = ele.getText();
 		return text;
+	}
+	public List<Map<String,String>> sql() {
+		Connection con = null;
+		List<Map<String,String>> li = new ArrayList();
+		Map<String,String> map = new HashMap<String, String>();
+		try {
+			Class.forName(".\\org.Rsc_Ecom\\Driver\\mysql-connector-j-9.2.0.jar");
+		    String connectionString ="localhost:4299/username:user/password:pass/";
+		    try {
+		    	con = DriverManager.getConnection(connectionString);
+		    	System.out.println("Databaseconnection");
+		    	Statement stmt = con.createStatement();
+		    	ResultSet rt = stmt.executeQuery(connectionString);
+		        while(rt.next()) {
+		        	String name = rt.getString("username");
+		        	map.put("username", name);
+		        	String pass =rt.getString("password");
+		        	map.put("password", pass);
+		        }
+		    }catch(Exception e) {
+		    	e.printStackTrace();
+		    }
+		}catch (Exception e) {
+			e.printStackTrace();
+			
+		}
+		return li;
+		
 	}
 
 }

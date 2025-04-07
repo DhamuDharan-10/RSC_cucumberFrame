@@ -2,15 +2,20 @@ package org.pageobjectRepo;
 
 import java.util.List;
 
+import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
 import com.Base.Rsc_Ecom.Utilites;
 
-public class Shopinglocator extends Utilites {
+public class Shopinglocator {
+	
+	Utilites utils = Utilites.getSingle();
+	static WebDriver driver;
 	
 	public Shopinglocator() {
+		driver = utils.driver;
 		PageFactory.initElements(driver, this);
 	}
 	

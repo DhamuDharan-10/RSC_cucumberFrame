@@ -3,7 +3,9 @@ package com.Hooks.org.rsc_Ecom;
 
 
 import org.openqa.selenium.OutputType;
+
 import org.openqa.selenium.TakesScreenshot;
+import org.openqa.selenium.WebDriver;
 
 import com.Base.Rsc_Ecom.Utilites;
 
@@ -14,10 +16,15 @@ import cucumber.api.java.Before;
 
 
 
-public class Hooks extends Utilites {
+public class Hooks {
+	
+	Utilites utilis = Utilites.getSingle();
+	static WebDriver driver;
+	
 	@Before
 	public void ApplicationLaucher(Scenario scenario) {
-		BrowserLaucher();
+		utilis.BrowserLaucher();
+		driver = Utilites.driver;
 		final byte[] image = ((TakesScreenshot)driver).getScreenshotAs(OutputType.BYTES);
 		scenario.embed(image, "image/png");
 	}
@@ -25,7 +32,7 @@ public class Hooks extends Utilites {
 	public void tearDown(Scenario scenario) {
 		byte[] image = ((TakesScreenshot)driver).getScreenshotAs(OutputType.BYTES);
 		scenario.embed(image, "image/png");
-		BrowserClose();
+		utilis.BrowserClose();
 	}
 
 }

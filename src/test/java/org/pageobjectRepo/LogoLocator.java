@@ -1,14 +1,18 @@
 package org.pageobjectRepo;
 
+import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
 import com.Base.Rsc_Ecom.Utilites;
 
-public class LogoLocator extends Utilites {
+public class LogoLocator {
+	Utilites utils = Utilites.getSingle();
+	static WebDriver driver;
 	
 	public LogoLocator () {
+		driver = utils.driver;
 		PageFactory.initElements(driver, this);
 	}
 	

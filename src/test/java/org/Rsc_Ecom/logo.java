@@ -1,20 +1,14 @@
 package org.Rsc_Ecom;
 
-import org.openqa.selenium.By;
-
-
-import org.openqa.selenium.WebElement;
 import org.pageobjectRepo.LogoLocator;
-
 import com.Base.Rsc_Ecom.Utilites;
-
 import cucumber.api.java.en.Then;
 
 
 
-public class logo extends Utilites{
+public class logo{
 	LogoLocator fonts = new LogoLocator();
-	Utilites utility = new Utilites();
+	Utilites utility =Utilites.getSingle();
 //	@Then("validate the logo Background color")
 //	public void validate_the_logo_background_color() {
 //	    String Actualfamily= logo.getCssValue("font-family");
